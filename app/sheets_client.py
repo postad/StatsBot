@@ -1,5 +1,7 @@
 import gspread
-from oauth2client.service_account import ServiceAccountCredentials
+import json
+import os
+from google.oauth2.service_account import Credentials
 from loguru import logger
 from datetime import datetime
 
@@ -9,21 +11,27 @@ class SheetsClient:
         self.client = None
         self._connect()
 
-    #connection
     def _connect(self):
         try:
             scope = [
                 'https://spreadsheets.google.com/feeds',
                 'https://www.googleapis.com/auth/drive'
             ]
-            creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
+
+            # Попробуем загрузить credentials из переменной окружения или файла
+            creds_json = os.getenv('GOOGLE_CREDENTIALS_JSON')
+            if creds_json:
+                creds_dict = json.loads(creds_json)
+                creds = Credentials.from_service_account_info(creds_dict, scopes=scope)
+            else:
+                creds = Credentials.from_service_account_file('credentials.json', scopes=scope)
+
             self.client = gspread.authorize(creds)
             logger.info("Connected to Google Sheets API")
         except Exception as e:
             logger.error(f"Failed to connect to Google Sheets: {e}")
             self.client = None
 
-    #fetching all data
     def get_all_data(self):
         if not self.client:
             logger.warning("No Google Sheets connection")
@@ -89,7 +97,6 @@ class SheetsClient:
         logger.info(f"Checking code {dash_code} : {'found' if exists else 'not found'}")
         return exists
 
-    #getting campaign by code
     def get_campaigns_by_code(self, dash_code):
         data = self.get_all_data()
 
@@ -184,7 +191,8 @@ class SheetsClient:
 
             for record in records:
                 # check several possible column names
-                if record.get('telegram_id') == telegram_id or record.get('Telegram ID') == telegram_id or str(record.get('Telegram_ID')) == str(telegram_id):
+                if record.get('telegram_id') == telegram_id or record.get('Telegram ID') == telegram_id or str(
+                        record.get('Telegram_ID')) == str(telegram_id):
                     return record.get('client_id') or record.get('Client ID')
 
             return None
