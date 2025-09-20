@@ -60,8 +60,8 @@ async def stats_command(message: Message):
 
 
         response += f"📊 Campaign Report — {campaign.get('Campaign ID', 'N/A')}\n"
-        response += f"🟢 {campaign.get("Company Name", 'N/A')}\n"
-        response += f"🔗 {campaign.get("Campaign URL", 'N/A')}\n"
+        response += f"🟢 {campaign.get('Company Name', 'N/A')}\n"
+        response += f"🔗 {campaign.get('Campaign URL', 'N/A')}\n"
         response += f"👀 Views: {views:,}\n"
         response += f"💰 Cost: ₪{cost:,.2f}\n"
         response += f"📉 CPM: {(campaign.get('CPM', '0'))}\n"
