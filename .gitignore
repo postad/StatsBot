@@ -1,0 +1,16 @@
+# virtual environment
+venv/
+.idea/
+
+# sensitive files
+.env
+credentials.json
+
+# python cache
+__pycache__/
+*.pyc
+*.pyo
+
+# system files
+.DS_Store
+*.log
