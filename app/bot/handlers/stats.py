@@ -67,7 +67,9 @@ async def stats_command(message: Message):
         response += f"💰 Cost: ₪{cost:,.2f}\n"
         response += f"📉 CPM: {(campaign.get('CPM', '0'))}\n"
         response += f"📅 {campaign.get('Date', 'N/A')}\n"
-        response += f"🔗 View campaign\n\n"
+
+        campaign_url = campaign.get('Campaign URL', '#')
+        response += f"🔗 [View campaign]({campaign_url})\n"
 
     avg_cpm = (total_cost / total_views * 1000 if total_views > 0 else 0)
 
