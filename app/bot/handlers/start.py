@@ -51,9 +51,17 @@ async def process_dash_code(message: Message):
             )
             return
 
-        #Receiving campaigns for this code
-        campaigns = sheets_client.get_campaigns_by_code(dash_code)
-        campaigns_count = len(campaigns)
+        existing_users = sheets_client.get_users_sheet()
+        if existing_users:
+            records = existing_users.get_all_records()
+            for record in records:
+                existing_client_id = record.get('client_id') or record.get("Client ID") #depends on google sheets column name
+                if existing_client_id and str(existing_client_id) == str(dash_code):
+                    await message.answer(f"❌ This company code is already registered by another user.\n\n"
+                                         f"Please contact support at support@example.com to receive your dashboard code.",
+                                         parse_mode="Markdown")
+                    return
+
 
         #saving telegram_id
         success = sheets_client.save_user_to_sheets(

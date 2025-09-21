@@ -33,7 +33,9 @@ async def stats_command(message: Message):
         await message.answer(f"No campaigns found for code {dash_code}")
         return
 
-    response = (f"Statistics for code: {dash_code}\n"
+    company_name = campaigns[0].get('Company Name')
+
+    response = (f"Statistics for code: {company_name}\n"
                 f"━━━━━━━━━━━━━━━\n\n")
 
     total_cost = 0
@@ -61,11 +63,11 @@ async def stats_command(message: Message):
 
         response += f"📊 Campaign Report — {campaign.get('Campaign ID', 'N/A')}\n"
         response += f"🟢 {campaign.get('Company Name', 'N/A')}\n"
-        response += f"🔗 {campaign.get('Campaign URL', 'N/A')}\n"
         response += f"👀 Views: {views:,}\n"
         response += f"💰 Cost: ₪{cost:,.2f}\n"
         response += f"📉 CPM: {(campaign.get('CPM', '0'))}\n"
-        response += f"📅{campaign.get('Date', 'N/A')}\n\n"
+        response += f"📅 {campaign.get('Date', 'N/A')}\n"
+        response += f"🔗 View campaign\n\n"
 
     avg_cpm = (total_cost / total_views * 1000 if total_views > 0 else 0)
 
