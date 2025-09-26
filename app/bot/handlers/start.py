@@ -86,7 +86,7 @@ async def process_dash_code(message: Message):
 
     else:
         await message.answer(f"❌ Your account is not found or not active.\n\n"
-                             f"Please contact support at support@example.com to receive your dashboard code.",
+                             f"Please contact support at support@postad.io to receive your dashboard code.",
                              parse_mode="Markdown")
 
 
