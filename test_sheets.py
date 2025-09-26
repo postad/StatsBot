@@ -12,7 +12,7 @@ def test_connection():
         creds = ServiceAccountCredentials.from_json_keyfile_name('credentials.json', scope)
         client = gspread.authorize(creds)
 
-        sheet_url = 'https://docs.google.com/spreadsheets/d/1mxFxyIrM9H9LrUE2Jjl3hqy1gRZiWHARv9DN9AqM7jE/edit?gid=685865956#gid=685865956'
+        sheet_url = 'https://docs.google.com/spreadsheets/d/1k4sQCH30fDpXKeO0mHbtzBHlKWvHAA5udyAzZXDBm5w'
         sheet_id = sheet_url.split('/')[5]
         sheet = client.open_by_key(sheet_id).sheet1
 
