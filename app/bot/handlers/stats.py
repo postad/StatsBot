@@ -46,9 +46,10 @@ async def stats_command(message: Message):
         views_str = str(campaign.get('Views', '0'))
 
         #cleaning cost (without currency)
-        cost_clean = re.sub(r'[^\d.]', '', cost_str.replace(",", '.'))
-        views_clean = re.sub(r'[^\d.]', '', views_str)
+        views_clean = re.sub(r'[^\d]', '', str(views_str))
 
+        cost_str_clean = str(cost_str).replace("₪", "").strip()
+        cost_clean = cost_str_clean.replace(",", "")
 
         try:
             cost = float(cost_clean) if cost_clean else 0
