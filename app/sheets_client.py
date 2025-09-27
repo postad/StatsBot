@@ -38,7 +38,7 @@ class SheetsClient:
             return []
 
         try:
-            sheet_url = 'https://docs.google.com/spreadsheets/d/1mxFxyIrM9H9LrUE2Jjl3hqy1gRZiWHARv9DN9AqM7jE/edit?gid=685865956#gid=685865956'
+            sheet_url = 'https://docs.google.com/spreadsheets/d/1k4sQCH30fDpXKeO0mHbtzBHlKWvHAA5udyAzZXDBm5w'
             sheet_id = sheet_url.split('/')[5]
             spreadsheet = self.client.open_by_key(sheet_id)
 
@@ -128,7 +128,7 @@ class SheetsClient:
 
     def get_users_sheet(self):
         try:
-            sheet_url = "https://docs.google.com/spreadsheets/d/1mxFxyIrM9H9LrUE2Jjl3hqy1gRZiWHARv9DN9AqM7jE/edit?gid=705487120#gid=705487120"
+            sheet_url = "https://docs.google.com/spreadsheets/d/1k4sQCH30fDpXKeO0mHbtzBHlKWvHAA5udyAzZXDBm5w"
             sheet_id = sheet_url.split('/')[5]
             spreadsheet = self.client.open_by_key(sheet_id)
 

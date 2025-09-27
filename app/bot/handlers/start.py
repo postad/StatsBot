@@ -46,7 +46,7 @@ async def process_dash_code(message: Message):
         if sheets_client.check_user_exists_in_sheets(user_id):
             await checking_msg.edit_text(
                 f"❌ Your Telegram account is already linked to the dashboard code.\n\n"
-                f"Please contact support at support@example.com if you need help.",
+                f"Please contact support at support@postad.io if you need help.",
                 parse_mode="Markdown"
             )
             return
@@ -58,7 +58,7 @@ async def process_dash_code(message: Message):
                 existing_client_id = record.get('client_id') or record.get("Client ID") #depends on google sheets column name
                 if existing_client_id and str(existing_client_id) == str(dash_code):
                     await message.answer(f"❌ This company code is already registered by another user.\n\n"
-                                         f"Please contact support at support@example.com to receive your dashboard code.",
+                                         f"Please contact support at support@postad.io to receive your dashboard code.",
                                          parse_mode="Markdown")
                     return
 
@@ -86,7 +86,7 @@ async def process_dash_code(message: Message):
 
     else:
         await message.answer(f"❌ Your account is not found or not active.\n\n"
-                             f"Please contact support at support@example.com to receive your dashboard code.",
+                             f"Please contact support at support@postad.io to receive your dashboard code.",
                              parse_mode="Markdown")
 
 
